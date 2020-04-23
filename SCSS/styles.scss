@@ -1,0 +1,135 @@
+// variables
+$Block1: #244F75;
+$Block2: #60BFBF;
+$Block3: #8C4B7E;
+$Block4: #F8BB44;
+$Block5: #F24B4B;
+
+$textcolor: white;
+
+$colors: $Block1, $Block2, $Block3, $Block4, $Block5;
+$animations: fromLeft,fromBottom, fromTop, fromBottom,fromRight;
+
+
+body{
+    margin:0;
+    padding:0;
+    font-family: 'Lato', sans-serif;
+    
+}
+
+.container{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 100vh;
+    column-gap: 5px;
+}
+
+
+
+.stripe{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    
+    &::before{
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0.1;
+        top:0;
+        left: 0;
+        transform: skew(20deg);
+        transform-origin: center center;
+        position: relative;
+        transition: 80ms;
+        z-index: 1;
+    }
+
+    &:hover::before{
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0.1;
+            top:0;
+            left: 0;
+            position: relative;
+            transform-origin: center center;
+            transform: skew(0deg);
+    }
+    
+    h1{
+        font-weight: 300;
+        font-size: 50px;
+        color: $textcolor;
+        position: absolute;
+        
+    }
+}
+
+
+
+@for $i from 1 through 5{
+    .stripe:nth-child(#{$i}){    
+        background-color: nth($colors, $i);
+        animation: nth($animations, $i);
+        // animation-delay: $i*100ms;
+        animation-duration: .9s;
+        // transition-timing-function: ease-in-out;
+    }
+
+}
+
+@keyframes fromLeft{
+    0%{
+        opacity: 0;
+        transform: translate(-100%,0);
+    }
+    100%{
+        
+        opacity: 1;
+        transform: translate(0,0);
+    }
+}
+@keyframes fromRight{
+    0%{   
+        opacity: 0;
+        transform: translate(100%,0);
+    }
+    
+    100%{
+        
+        opacity: 1;
+        transform: translate(0, 0,);
+    }
+}
+@keyframes fromTop{
+    0%{
+        
+        opacity: 0;
+        transform: translate(0,-100%);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0, 0,);
+    }
+}
+@keyframes fromBottom{
+    0%{
+        
+        opacity: 0;
+        transform: translate(0,100%);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0, 0,);
+    }
+}
+
